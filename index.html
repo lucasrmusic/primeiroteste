@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucas Shop</title>
-    <!-- Importando a fonte Orbitron do Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <!-- Importando as fontes Orbitron e Poppins do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -39,7 +39,7 @@
             color: #333333;
             letter-spacing: 1px;
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif; /* Fonte inspirada na logo do Grok */
+            font-family: 'Orbitron', sans-serif;
         }
 
         .navbar .menu {
@@ -92,14 +92,12 @@
         /* Seção Principal (Hero) */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #2b2b2b 0%, #d0d0d0 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding-top: 80px;
-            position: relative;
-            overflow: hidden;
         }
 
         .hero::before {
@@ -109,28 +107,52 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.1);
+            background: url('https://wallpapers.com/images/high/clouds-4k-4wd74d6r7i4dif01.webp') no-repeat center center/cover;
+            filter: blur(5px) grayscale(100%);
             z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px; /* Espaçamento entre os elementos */
         }
 
         .hero-content h1 {
             font-size: 54px;
             color: #ffffff;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0; /* Removi margem para centralização */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             font-weight: 700;
+            font-family: 'Poppins', sans-serif; /* Nova fonte moderna */
         }
 
         .hero-content p {
             font-size: 22px;
-            color: #cccccc;
-            margin-bottom: 35px;
+            color: #ffffff;
+            margin: 0; /* Removi margem para centralização */
             max-width: 600px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .hero-content .start-btn {
@@ -144,6 +166,7 @@
             text-decoration: none;
             display: inline-block;
             transition: transform 0.2s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .hero-content .start-btn:hover {
@@ -162,38 +185,68 @@
             padding: 12px 35px;
             background-color: transparent;
             color: #ffffff;
-            border: 2px solid #aaaaaa;
+            border: 2px solid #ffffff;
             border-radius: 30px;
             font-size: 16px;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .hero-content .extra-btn:hover {
-            background-color: #aaaaaa;
+            background-color: #ffffff;
             color: #333333;
-            border-color: #aaaaaa;
+            border-color: #ffffff;
         }
 
         /* Seção de Recursos */
         .features {
             padding: 100px 60px;
             text-align: center;
-            background-color: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://wallpapers.com/images/high/clouds-4k-4wd74d6r7i4dif01.webp') no-repeat center center/cover;
+            filter: blur(5px) grayscale(100%);
+            z-index: 1;
+        }
+
+        .features::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .features .feature-grid {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
         }
 
         .features h2 {
             font-size: 40px;
-            color: #333333;
+            color: #ffffff;
             margin-bottom: 60px;
             font-weight: 600;
-        }
-
-        .feature-grid {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 3;
         }
 
         .feature-item {
@@ -201,8 +254,10 @@
             background-color: #ffffff;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            position: relative;
+            z-index: 3;
         }
 
         .feature-item:hover {
