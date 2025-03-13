@@ -38,8 +38,8 @@
             font-weight: 700;
             color: #333333;
             letter-spacing: 1px;
-            cursor: pointer; /* Indica que é clicável */
-            font-family: 'Orbitron', sans-serif; /* Fonte inspirada na logo do Grok */
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .navbar .menu {
@@ -105,7 +105,7 @@
             width: 100%;
             height: 100%;
             background: url('https://wallpapers.com/images/high/clouds-4k-4wd74d6r7i4dif01.webp') no-repeat center center/cover;
-            filter: blur(5px) grayscale(100%); /* Imagem em preto e branco com desfoque */
+            filter: blur(5px) grayscale(100%);
             z-index: 1;
         }
 
@@ -116,7 +116,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Overlay suavizado para menos "preto chapado" */
+            background: rgba(0, 0, 0, 0.2);
             z-index: 2;
         }
 
@@ -156,18 +156,51 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .product-item:hover {
             transform: translateY(-10px);
         }
 
-        .product-item img {
+        .product-item .image-container {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 180px; /* Reduzido para ser mais quadrado */
+            background-color: #ffffff; /* Caixa branca por padrão */
             border-radius: 10px;
             margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-item .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem ocupar mais espaço */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Transição para Nuvem Carregada (esquerda para direita) */
+        .product-item .image-container img.nuvem {
+            left: -100%; /* Inicia fora da caixa (à esquerda) */
+            transition: left 0.2s ease-out;
+        }
+
+        .product-item:hover .image-container img.nuvem {
+            left: 0; /* "Puxa" a imagem para a caixa */
+        }
+
+        /* Transição para Gota de Chuva (esquerda para direita) */
+        .product-item .image-container img.gota {
+            left: -100%; /* Inicia fora da caixa (à esquerda) */
+            transition: left 0.2s ease-out;
+        }
+
+        .product-item:hover .image-container img.gota {
+            left: 0; /* "Puxa" a imagem para a caixa */
         }
 
         .product-item h3 {
@@ -258,38 +291,50 @@
             <p>Explore nossos produtos e faça suas compras com facilidade!</p>
             <div class="product-grid">
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200" alt="Nuvem">
-                    <h3>Nuvem carregada</h3>
+                    <div class="image-container">
+                        <img src="https://super.abril.com.br/wp-content/uploads/2020/01/si_412-oraculo-nuvem-site.png?w=1024&h=682&crop=1" alt="Nuvem Carregada" class="nuvem">
+                    </div>
+                    <h3>Nuvem Carregada</h3>
                     <div class="price">R$ 5999,90</div>
                     <button>Comprar</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200" alt="Nuvem">
-                    <h3>Nuvem comum</h3>
+                    <div class="image-container">
+                        <img src="https://img.freepik.com/fotos-gratis/nuvem-em-um-ceu-azul_1122-624.jpg?t=st=1741860410~exp=1741864010~hmac=d9b447da2cdbab75d70ddb5183ba35fcf9fe2d9e32bfff3b591329d77a1ab8b1&w=1060" alt="Nuvem Comum" class="nuvem">
+                    </div>
+                    <h3>Nuvem Comum</h3>
                     <div class="price">R$ 1999,00</div>
                     <button>Comprar</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200" alt="Ar">
-                    <h3>Ar denso</h3>
+                    <div class="image-container">
+                        <img src="https://hypescience.com/wp-content/uploads/2024/10/ventos-dobrando-palmeiras.webp" alt="Ar Denso" class="nuvem">
+                    </div>
+                    <h3>Ar Denso</h3>
                     <div class="price">R$ 99750,00</div>
                     <button>Comprar</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200" alt="Raio de sol">
-                    <h3>Raio de sol original</h3>
+                    <div class="image-container">
+                        <img src="https://img.freepik.com/fotos-premium/nuvem-o-ceu-noturno-ao-por-do-sol-e-o-sol-forte-com-raios_556258-17.jpg?w=1060" alt="Raio de Sol" class="nuvem">
+                    </div>
+                    <h3>Raio de Sol Original</h3>
                     <div class="price">R$ 9500,00</div>
                     <button>Comprar</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200" alt="Raio de sol">
-                    <h3>Raio de sol fim de tarde</h3>
+                    <div class="image-container">
+                        <img src="https://img.freepik.com/fotos-gratis/reflexo-de-lente-de-luz-natural-com-efeito-de-raio-de-sol-de-fundo-dourado_53876-103027.jpg?t=st=1741860333~exp=1741863933~hmac=ec58de3eaeeaf6c999b90decd4c93d9a1397671979ed46ecf19209cf1006ebcc&w=1060" alt="Raio de Sol" class="nuvem">
+                    </div>
+                    <h3>Raio de Sol Fim de Tarde</h3>
                     <div class="price">R$ 5500,00</div>
                     <button>Comprar</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200" alt="Gotas de chuva">
-                    <h3>Gotas de chuva</h3>
+                    <div class="image-container">
+                        <img src="https://img.cdndsgni.com/preview/10152846.jpg" alt="Gotas de Chuva" class="gota">
+                    </div>
+                    <h3>Gotas de Chuva</h3>
                     <div class="price">R$ 950,00</div>
                     <button>Comprar</button>
                 </div>
