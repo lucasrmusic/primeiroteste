@@ -19,9 +19,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 60px;
+            padding: 15px 30px; /* Reduzido para melhor adaptação */
             background-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             position: fixed;
             width: 100%;
             top: 0;
@@ -34,7 +34,7 @@
         }
 
         .navbar .logo {
-            font-size: 28px;
+            font-size: 1.5rem; /* Relativo a 24px */
             font-weight: 700;
             color: #333333;
             letter-spacing: 1px;
@@ -44,13 +44,14 @@
 
         .navbar .menu {
             display: flex;
-            gap: 25px;
+            gap: 20px;
         }
 
         .navbar .menu a {
             text-decoration: none;
             color: #555555;
             font-weight: 500;
+            font-size: 1rem; /* Relativo a 16px */
             position: relative;
             transition: color 0.3s ease;
         }
@@ -75,13 +76,14 @@
         }
 
         .navbar .login-btn {
-            padding: 10px 25px;
+            padding: 8px 20px; /* Reduzido para telas menores */
             background-color: #666666;
             color: #ffffff;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 500;
+            font-size: 1rem;
             transition: background-color 0.3s ease;
         }
 
@@ -89,12 +91,22 @@
             background-color: #888888;
         }
 
+        /* Menu Hamburguer */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: #333333;
+            cursor: pointer;
+        }
+
         /* Seção Principal (Hero) */
         .hero {
             height: 100vh;
             position: relative;
             overflow: hidden;
-            padding-top: 80px;
+            padding-top: 60px; /* Reduzido para telas menores */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -135,33 +147,35 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* Espaçamento entre os elementos */
+            gap: 15px;
+            width: 90%; /* Para melhor ajuste em telas menores */
+            max-width: 800px;
         }
 
         .hero-content h1 {
-            font-size: 54px;
+            font-size: 3.4rem; /* Relativo a 54px */
             color: #ffffff;
-            margin-bottom: 0; /* Removi margem para centralização */
+            margin-bottom: 0;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             font-weight: 700;
-            font-family: 'Poppins', sans-serif; /* Nova fonte moderna */
+            font-family: 'Poppins', sans-serif;
         }
 
         .hero-content p {
-            font-size: 22px;
+            font-size: 1.4rem; /* Relativo a 22px */
             color: #ffffff;
-            margin: 0; /* Removi margem para centralização */
-            max-width: 600px;
+            margin: 0;
+            max-width: 100%; /* Ajustado para telas menores */
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .hero-content .start-btn {
-            padding: 15px 45px;
+            padding: 12px 40px; /* Reduzido para telas menores */
             background-color: #555555;
             color: #ffffff;
             border: none;
             border-radius: 30px;
-            font-size: 18px;
+            font-size: 1.1rem; /* Relativo a 18px */
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
@@ -175,19 +189,20 @@
         }
 
         .hero-content .extra-buttons {
-            margin-top: 25px;
+            margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap; /* Para evitar que os botões fiquem fora da tela */
         }
 
         .hero-content .extra-btn {
-            padding: 12px 35px;
+            padding: 10px 30px; /* Reduzido para telas menores */
             background-color: transparent;
             color: #ffffff;
             border: 2px solid #ffffff;
             border-radius: 30px;
-            font-size: 16px;
+            font-size: 1rem; /* Relativo a 16px */
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -202,7 +217,7 @@
 
         /* Seção de Recursos */
         .features {
-            padding: 100px 60px;
+            padding: 80px 20px; /* Reduzido para telas menores */
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -236,13 +251,14 @@
             z-index: 3;
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 30px;
+            flex-wrap: wrap; /* Para que os itens quebrem linha em telas menores */
         }
 
         .features h2 {
-            font-size: 40px;
+            font-size: 2.5rem; /* Relativo a 40px */
             color: #ffffff;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             font-weight: 600;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
@@ -252,46 +268,186 @@
         .feature-item {
             max-width: 320px;
             background-color: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px; /* Reduzido para telas menores */
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             position: relative;
             z-index: 3;
+            width: 100%; /* Para melhor ajuste */
         }
 
         .feature-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
         }
 
         .feature-item h3 {
-            font-size: 26px;
+            font-size: 1.6rem; /* Relativo a 26px */
             color: #444444;
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
         .feature-item p {
             color: #666666;
             line-height: 1.6;
+            font-size: 1rem; /* Relativo a 16px */
         }
 
         /* Rodapé */
         .footer {
             background-color: #333333;
             color: #cccccc;
-            padding: 50px 60px;
+            padding: 30px 20px; /* Reduzido para telas menores */
             text-align: center;
         }
 
         .footer a {
             color: #aaaaaa;
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 10px;
+            font-size: 0.9rem; /* Relativo a 14px */
             transition: color 0.3s ease;
         }
 
         .footer a:hover {
             color: #ffffff;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar .menu.active {
+                display: flex;
+            }
+
+            .navbar .menu a {
+                padding: 10px 20px;
+                font-size: 1.1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+
+            .hero-content {
+                padding: 15px;
+                width: 95%;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem; /* Reduzido para telas menores */
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-content .start-btn {
+                padding: 10px 30px;
+                font-size: 1rem;
+            }
+
+            .hero-content .extra-btn {
+                padding: 8px 25px;
+                font-size: 0.9rem;
+            }
+
+            .features {
+                padding: 60px 15px;
+            }
+
+            .features h2 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .feature-item {
+                max-width: 280px;
+                padding: 15px;
+            }
+
+            .feature-item h3 {
+                font-size: 1.3rem;
+                margin: 10px 0;
+            }
+
+            .feature-item p {
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .logo {
+                font-size: 1.2rem;
+            }
+
+            .navbar .login-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .hero-content .start-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+
+            .hero-content .extra-btn {
+                padding: 6px 20px;
+                font-size: 0.8rem;
+            }
+
+            .features h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .feature-item {
+                max-width: 100%;
+                padding: 10px;
+            }
+
+            .feature-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .feature-item p {
+                font-size: 0.8rem;
+            }
+
+            .footer a {
+                font-size: 0.8rem;
+                margin: 0 5px;
+            }
         }
     </style>
 </head>
@@ -299,6 +455,7 @@
     <!-- Navegação -->
     <nav class="navbar">
         <div class="logo" onclick="window.location.href='index.html'">Lucas Shop</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <div class="menu">
             <a href="#">Modelos</a>
             <a href="#">Recursos</a>
@@ -350,7 +507,7 @@
         </p>
     </footer>
 
-    <!-- JavaScript para efeito de rolagem na navbar -->
+    <!-- JavaScript para efeito de rolagem na navbar e toggle do menu -->
     <script>
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
@@ -360,6 +517,11 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
