@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Poker - Produtos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden; /* Evita barra de rolagem horizontal */
+    }
+
+    /* Estilo do menu superior */
+    .navbar {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff5f5f;
+      text-decoration: none;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #ff5f5f;
+    }
+
+    .navbar .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .navbar .nav-buttons a {
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .navbar .nav-buttons .login {
+      color: #ff5f5f;
+      border: 1px solid #ff5f5f;
+    }
+
+    .navbar .nav-buttons .login:hover {
+      background: #ff5f5f;
+      color: #000;
+    }
+
+    .navbar .nav-buttons .signup {
+      background: #ff5f5f;
+      color: #000;
+    }
+
+    .navbar .nav-buttons .signup:hover {
+      background: #ff8080;
+    }
+
+    /* Contêiner principal */
+    .main-container {
+      display: flex;
+      flex-grow: 1;
+      padding-top: 60px; /* Espaço para o menu fixo */
+      min-height: calc(100vh - 60px - 200px); /* Ajusta para o rodapé */
+      transition: margin-left 0.3s ease; /* Transição suave para o conteúdo principal */
+      position: relative; /* Necessário para centralização absoluta */
+    }
+
+    /* Estilos do menu lateral */
+    .sidebar {
+      width: 240px;
+      background-color: #1a1a1a;
+      padding: 20px;
+      box-sizing: border-box;
+      position: absolute; /* Posicionamento absoluto para não afetar o centro */
+      top: 60px; /* Alinha abaixo do menu superior */
+      bottom: 0;
+      transition: transform 0.3s ease; /* Animação de retrair/expandir */
+    }
+
+    .sidebar.retracted {
+      transform: translateX(-100%); /* Esconde o menu lateral */
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease; /* Transição para destaque e zoom */
+    }
+
+    /* Efeito de destaque e zoom ao passar o mouse */
+    .sidebar ul li:hover {
+      background-color: #ff5f5f; /* Destaque em vermelho */
+      transform: scale(1.05); /* Pequeno zoom */
+    }
+
+    /* Botão de retrair/expandir */
+    .toggle-btn {
+      position: fixed; /* Fixo na tela para rolagem */
+      top: 50%; /* Centralizado verticalmente */
+      transform: translateY(-50%);
+      background-color: #ff5f5f;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: left 0.3s ease; /* Transição suave para o movimento horizontal */
+      z-index: 1001; /* Garante que o botão fique acima de outros elementos */
+    }
+
+    /* Ajuste da posição do botão quando o menu está retraído */
+    .sidebar.retracted ~ .toggle-btn {
+      left: 0; /* Quando o menu está retraído, o botão fica na borda esquerda */
+    }
+
+    .sidebar:not(.retracted) ~ .toggle-btn {
+      left: 225px; /* Quando o menu está expandido, o botão se move para a borda do menu */
+    }
+
+    /* Ajuste do conteúdo principal quando o menu está retraído */
+    .main-container.retracted {
+      margin-left: 0; /* Remove o espaço do menu lateral */
+    }
+
+    /* Estilos da seção de loja */
+    .shop-section {
+      flex-grow: 1;
+      padding: 20px 40px; /* Ajustado para ficar mais próximo do menu superior */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centraliza horizontalmente */
+      width: 100%; /* Garante que o conteúdo ocupe toda a largura disponível */
+    }
+
+    .shop-section h2 {
+      font-size: 40px;
+      margin-bottom: 30px;
+      color: #ff5f5f;
+      text-align: center;
+    }
+
+    .courses {
+      display: flex;
+      gap: 30px; /* Espaço entre os cards */
+      flex-wrap: wrap;
+      justify-content: center; /* Centraliza os cards horizontalmente */
+      max-width: 1000px; /* Limita a largura para melhor visualização */
+    }
+
+    .course-card {
+      background-color: #1a1a1a;
+      width: 200px;
+      height: 380px; /* Altura ajustada anteriormente */
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease; /* Transição para o efeito de zoom */
+    }
+
+    .course-card:hover {
+      transform: scale(1.1); /* Zoom ajustado anteriormente */
+      z-index: 1; /* Garante que o card com zoom não invada outros */
+    }
+
+    /* Contêiner para a imagem */
+    .course-card .image-container {
+      width: 100%;
+      height: 250px; /* Aumentei a altura para que a imagem ocupe mais espaço */
+      padding: 10px; /* Margem ao redor da imagem */
+      box-sizing: border-box;
+      flex-shrink: 0; /* Impede que o contêiner da imagem seja comprimido */
+    }
+
+    .course-card img {
+      width: 100%;
+      height: 100%; /* Ajusta a imagem para preencher o contêiner */
+      object-fit: contain; /* Garante que a imagem completa seja exibida, sem cortes */
+      border-radius: 5px; /* Bordas arredondadas para a imagem */
+    }
+
+    /* Estilo específico para o primeiro card com imagem de fundo */
+    .course-card:first-child .image-container {
+      background-image: url('Poker teste imagem.png');
+      background-size: contain; /* Garante que a imagem completa seja exibida */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #1a1a1a; /* Fundo do card para o caso de a imagem ter transparência */
+    }
+
+    /* Remover a tag <img> do primeiro card, já que usamos background-image no contêiner */
+    .course-card:first-child img {
+      display: none; /* Esconde a tag <img> */
+    }
+
+    /* Contêiner para o título, valor e botão, alinhado na parte inferior */
+    .course-card .card-footer {
+      margin-top: auto; /* Empurra para a parte inferior */
+      padding-bottom: 10px; /* Espaçamento na parte inferior do card */
+      flex-grow: 1; /* Permite que o contêiner ocupe o espaço restante */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* Alinha o conteúdo no final */
+    }
+
+    .course-card .card-footer h3 {
+      font-size: 18px;
+      margin: 5px 0; /* Reduzi a margem para aproximar a imagem do texto */
+      color: #fff;
+      padding: 0 10px; /* Adicionei padding para evitar que o texto fique muito próximo das bordas */
+      font-weight: bold; /* Garante que o título esteja em negrito */
+    }
+
+    .course-card .price {
+      font-size: 16px;
+      color: #ff5f5f;
+      margin: 5px 0; /* Mesma distância entre texto e valor, e valor e botão */
+      font-weight: bold; /* Coloca o valor em negrito */
+    }
+
+    .course-card .add-to-cart {
+      display: block;
+      width: 80%;
+      margin: 0 auto;
+      padding: 8px;
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .course-card .add-to-cart:hover {
+      background: #ff5f5f;
+    }
+
+    /* Estilo do rodapé */
+    footer {
+      background-color: #1a1a1a;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      color: #fff;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    footer .footer-section {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    footer h4 {
+      color: #ff5f5f;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    footer p,
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+
+    footer a:hover {
+      color: #ff5f5f;
+    }
+
+    footer .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    footer .social-icons a {
+      color: #fff;
+      font-size: 18px;
+    }
+
+    footer .social-icons a:hover {
+      color: #ff5f5f;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer ul li {
+      margin: 5px 0;
+    }
+
+    footer .newsletter input {
+      padding: 8px;
+      border: none;
+      border-radius: 20px 0 0 20px;
+      width: 150px;
+    }
+
+    footer .newsletter button {
+      padding: 8px 15px;
+      background: #ff5f5f;
+      color: #fff;
+      border: none;
+      border-radius: 0 20px 20px 0;
+      cursor: pointer;
+    }
+
+    footer .newsletter button:hover {
+      background: #ff8080;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Menu Superior -->
+  <div class="navbar">
+    <a href="index.html" class="logo">Prime Poker</a>
+    <div class="nav-links">
+      <a href="Produtos.html">Produtos</a>
+      <a href="#">Blog</a>
+      <a href="#">Perguntas Frequentes</a>
+      <a href="#">Sobre</a>
+      <a href="#">Contato</a>
+    </div>
+    <div class="nav-buttons">
+      <a href="#" class="login">Entrar</a>
+      <a href="#" class="signup">Cadastrar-se</a>
+    </div>
+  </div>
+
+  <!-- Contêiner principal -->
+  <div class="main-container retracted" id="main-container">
+    <!-- Menu Lateral -->
+    <div class="sidebar retracted" id="sidebar">
+      <ul>
+        <li>Painel</li>
+        <li>Ebooks</li>
+        <li><a href="Produtos.html" style="color: #fff; text-decoration: none;">Produtos</a></li>
+        <li>Vídeos de Coaching</li>
+        <li>Minha Conta</li>
+      </ul>
+      <button class="toggle-btn" id="toggle-btn"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Seção de Loja -->
+    <div class="shop-section">
+      <h2>Nossos Produtos</h2>
+      <div class="courses">
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Poker Estratégico Avançado">
+          </div>
+          <div class="card-footer">
+            <h3>Poker Estratégico Avançado</h3>
+            <div class="price">R$ 175,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Curso Spin & Go">
+          </div>
+          <div class="card-footer">
+            <h3>Curso Spin & Go</h3>
+            <div class="price">R$ 500,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Bubble Mastery">
+          </div>
+          <div class="card-footer">
+            <h3>Mestre da Bolha</h3>
+            <div class="price">R$ 500,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Pressure Systems">
+          </div>
+          <div class="card-footer">
+            <h3>Sistemas de Pressão</h3>
+            <div class="price">R$ 500,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Torneios Avançados">
+          </div>
+          <div class="card-footer">
+            <h3>Torneios Avançados</h3>
+            <div class="price">R$ 600,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Estratégias de Cash Game">
+          </div>
+          <div class="card-footer">
+            <h3>Estratégias de Cash Game</h3>
+            <div class="price">R$ 550,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Mentalidade de Poker">
+          </div>
+          <div class="card-footer">
+            <h3>Mentalidade de Poker</h3>
+            <div class="price">R$ 450,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Análise de Mãos">
+          </div>
+          <div class="card-footer">
+            <h3>Análise de Mãos</h3>
+            <div class="price">R$ 500,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Fundamentos de Poker">
+          </div>
+          <div class="card-footer">
+            <h3>Fundamentos de Poker</h3>
+            <div class="price">R$ 400,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Táticas de Bluff">
+          </div>
+          <div class="card-footer">
+            <h3>Táticas de Bluff</h3>
+            <div class="price">R$ 480,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Poker ao Vivo">
+          </div>
+          <div class="card-footer">
+            <h3>Poker ao Vivo</h3>
+            <div class="price">R$ 520,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="image-container">
+            <img src="https://via.placeholder.com/200x150" alt="Gestão de Banca">
+          </div>
+          <div class="card-footer">
+            <h3>Gestão de Banca</h3>
+            <div class="price">R$ 470,00</div>
+            <a href="#" class="add-to-cart">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-section">
+      <h4>Prime Poker</h4>
+      <p>Rua Fictícia, 123</p>
+      <p>São Paulo, SP 01234-567</p>
+      <p><a href="mailto:suporte@primepoker.com">suporte@primepoker.com</a></p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-discord"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#">Painel</a></li>
+        <li><a href="#">Ebooks</a></li>
+        <li><a href="Produtos.html">Produtos</a></li>
+        <li><a href="#">Vídeos de Coaching</a></li>
+        <li><a href="#">Minha Conta</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Inscreva-se na Newsletter</h4>
+      <div class="newsletter">
+        <input type="email" placeholder="Digite seu email">
+        <button>Inscrever-se</button>
+      </div>
+      <p>Mantenha-se atualizado com as últimas novidades do Prime Poker.</p>
+    </div>
+
+    <div class="footer-section">
+      <p>Prime Poker © 2025</p>
+      <p><a href="#">Política de Privacidade</a> | <a href="#">Termos e Condições</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript para controlar o menu retrátil -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const mainContainer = document.getElementById('main-container');
+    const toggleBtn = document.getElementById('toggle-btn');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('retracted');
+      mainContainer.classList.toggle('retracted');
+      // Alterna o ícone do botão entre setas esquerda e direita
+      toggleBtn.innerHTML = sidebar.classList.contains('retracted')
+        ? '<i class="fas fa-chevron-right"></i>'
+        : '<i class="fas fa-chevron-left"></i>';
+    });
+
+    // Adiciona o efeito de zoom ao passar o mouse sobre o botão "Adicionar ao Carrinho"
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.closest('.course-card').classList.add('hover');
+      });
+      button.addEventListener('mouseleave', () => {
+        button.closest('.course-card').classList.remove('hover');
+      });
+    });
+  </script>
+</body>
+
+</html>
